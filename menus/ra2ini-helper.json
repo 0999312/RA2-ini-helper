@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle ra2ini-helper",
+        "command": "ra2ini-helper:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "ra2ini-helper",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "ra2ini-helper:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

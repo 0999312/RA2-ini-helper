@@ -1,0 +1,81 @@
+'scopeName': 'source.ra2ini_grammar'
+'name': 'ra2ini_grammar'
+'fileTypes': ['ini']
+'patterns': [
+  {
+    begin: '\\[[A-Za-z0-9]+\\]'
+    end: '\\n'
+    name: 'storage.function.ini_section'
+  }
+  {
+    begin: '^([ \\t]+)?(?=#|//)'
+    beginCaptures:
+      1:
+        name: 'punctuation.whitespace.comment.leading.ra2_ini'
+    end: '(?!\\G)'
+    patterns: [
+      {
+        begin: '#|;'
+        beginCaptures:
+          0:
+            name: 'punctuation.definition.comment.ra2_ini'
+        end: '\\n'
+        name: 'comment.line.number-sign.ra2_ini'
+      }
+    ]
+  }
+
+  {
+    begin: '^([ #a-zA-Z0-9_:.\\\\-]+)\\s*(=)'
+    end: '\\n'
+    beginCaptures:
+      1:
+        name: 'support.constant.ra2_ini'
+        patterns: [
+          {
+            match: '\\\\([tnfr"\'\\\\]|u\\h{4})'
+            name: 'constant.character.escape.ra2_ini'
+          }
+        ]
+      2:
+        name: 'punctuation.separator.key-value.ra2_ini'
+    name: 'meta.key-pair.ra2_ini'
+    patterns: [
+      {
+        begin: '(?=\\S)'
+        end: '(?=\\n)'
+        name: 'string.unquoted.ra2_ini'
+        patterns: [
+          {
+            match: '''(?x)
+              \\\\                # a literal backslash
+              (                   # followed by
+                ["\\\\/bfnrt]     # one of these characters
+                |                 # or
+                u[0-9a-fA-F]{4}   # a u and four hex digits
+              )
+            '''
+            name: 'constant.character.escape.ra2_ini'
+          }
+          {
+            match: '§[0-9a-fk-or]'
+            name: 'constant.other.symbol.ra2_ini'
+          }
+          {
+            match: '<[a-zA-Z0-9-]+>'
+            name: 'constant.other.symbol.ra2_ini'
+          }
+          {
+            match: '%(\\d\\$)?([.+\\-0,(])*\\d?[aAbBcCeEgGxXhHsStTodfu]'
+            name: 'variable.ra2_ini'
+          }
+          {
+            match: '(?<!%)%(?!(\\d\\$)?([.+\\-0,(])*\\d?[aAbBcCeEgGxXhHsStTodfu]|%)'
+            name: 'invalid.illegal.ra2_ini'
+          }
+        ]
+      }
+    ]
+  }
+
+]
