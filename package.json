@@ -2,11 +2,10 @@
   "name": "ra2ini-helper",
   "main": "./lib/ra2ini-helper",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "An atom package for Red alert 2 ini coder",
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "ra2ini-helper:toggle"
   },
   "repository": "https://github.com/atom/ra2ini-helper",
   "license": "MIT",
